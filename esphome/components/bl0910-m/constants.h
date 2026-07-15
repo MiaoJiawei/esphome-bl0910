@@ -62,6 +62,18 @@ namespace esphome
         // Voltage frequency
         static const uint8_t BL0910_FREQUENCY = 0X4E;
 
+        // Angle registers (16-bit unsigned, 0x3C~0x45)
+        static const uint8_t BL0910_ANGLE_1 = 0x3C;
+        static const uint8_t BL0910_ANGLE_2 = 0x3D;
+        static const uint8_t BL0910_ANGLE_3 = 0x3E;
+        static const uint8_t BL0910_ANGLE_4 = 0x3F;
+        static const uint8_t BL0910_ANGLE_5 = 0x40;
+        static const uint8_t BL0910_ANGLE_6 = 0x41;
+        static const uint8_t BL0910_ANGLE_7 = 0x42;
+        static const uint8_t BL0910_ANGLE_8 = 0x43;
+        static const uint8_t BL0910_ANGLE_9 = 0x44;
+        static const uint8_t BL0910_ANGLE_10 = 0x45;
+
         // Internal temperature
         static const uint8_t BL0910_TEMPERATURE = 0X5E;
 

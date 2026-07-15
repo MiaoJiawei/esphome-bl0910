@@ -1,6 +1,7 @@
 #include "bl0910.h"
 #include "constants.h"
 #include <queue>
+#include <cmath>
 #include "esphome/core/log.h"
 
 namespace esphome
@@ -40,64 +41,69 @@ namespace esphome
         this->read_data_(BL0910_I_1_RMS, BL0910_IREF, this->current_1_sensor_);
         this->read_data_(BL0910_WATT_1, BL0910_PREF, this->power_1_sensor_);
         this->read_data_(BL0910_CF_1_CNT, BL0910_EREF, this->energy_1_sensor_);
-        this->calculate_power_factor_(this->current_1_sensor_, this->voltage_sensor_, this->power_1_sensor_, this->power_factor_1_sensor_);
+        this->calculate_power_factor_(this->read_angle_raw_(BL0910_ANGLE_1), this->power_factor_1_sensor_);
         break;
       case 2:
         this->read_data_(BL0910_I_2_RMS, BL0910_IREF, this->current_2_sensor_);
         this->read_data_(BL0910_WATT_2, BL0910_PREF, this->power_2_sensor_);
         this->read_data_(BL0910_CF_2_CNT, BL0910_EREF, this->energy_2_sensor_);
-        this->calculate_power_factor_(this->current_2_sensor_, this->voltage_sensor_, this->power_2_sensor_, this->power_factor_2_sensor_);
+        this->calculate_power_factor_(this->read_angle_raw_(BL0910_ANGLE_2), this->power_factor_2_sensor_);
         break;
       case 3:
         this->read_data_(BL0910_I_3_RMS, BL0910_IREF, this->current_3_sensor_);
         this->read_data_(BL0910_WATT_3, BL0910_PREF, this->power_3_sensor_);
         this->read_data_(BL0910_CF_3_CNT, BL0910_EREF, this->energy_3_sensor_);
-        this->calculate_power_factor_(this->current_3_sensor_, this->voltage_sensor_, this->power_3_sensor_, this->power_factor_3_sensor_);
+        this->calculate_power_factor_(this->read_angle_raw_(BL0910_ANGLE_3), this->power_factor_3_sensor_);
         break;
       case 4:
         this->read_data_(BL0910_I_4_RMS, BL0910_IREF, this->current_4_sensor_);
         this->read_data_(BL0910_WATT_4, BL0910_PREF, this->power_4_sensor_);
         this->read_data_(BL0910_CF_4_CNT, BL0910_EREF, this->energy_4_sensor_);
-        this->calculate_power_factor_(this->current_4_sensor_, this->voltage_sensor_, this->power_4_sensor_, this->power_factor_4_sensor_);
+        this->calculate_power_factor_(this->read_angle_raw_(BL0910_ANGLE_4), this->power_factor_4_sensor_);
         break;
       case 5:
         this->read_data_(BL0910_I_5_RMS, BL0910_IREF, this->current_5_sensor_);
         this->read_data_(BL0910_WATT_5, BL0910_PREF, this->power_5_sensor_);
         this->read_data_(BL0910_CF_5_CNT, BL0910_EREF, this->energy_5_sensor_);
-        this->calculate_power_factor_(this->current_5_sensor_, this->voltage_sensor_, this->power_5_sensor_, this->power_factor_5_sensor_);
+        this->calculate_power_factor_(this->read_angle_raw_(BL0910_ANGLE_5), this->power_factor_5_sensor_);
         break;
       case 6:
         this->read_data_(BL0910_I_6_RMS, BL0910_IREF, this->current_6_sensor_);
         this->read_data_(BL0910_WATT_6, BL0910_PREF, this->power_6_sensor_);
         this->read_data_(BL0910_CF_6_CNT, BL0910_EREF, this->energy_6_sensor_);
-        this->calculate_power_factor_(this->current_6_sensor_, this->voltage_sensor_, this->power_6_sensor_, this->power_factor_6_sensor_);
+        this->calculate_power_factor_(this->read_angle_raw_(BL0910_ANGLE_6), this->power_factor_6_sensor_);
         break;
       case 7:
         this->read_data_(BL0910_I_7_RMS, BL0910_IREF, this->current_7_sensor_);
         this->read_data_(BL0910_WATT_7, BL0910_PREF, this->power_7_sensor_);
         this->read_data_(BL0910_CF_7_CNT, BL0910_EREF, this->energy_7_sensor_);
-        this->calculate_power_factor_(this->current_7_sensor_, this->voltage_sensor_, this->power_7_sensor_, this->power_factor_7_sensor_);
+        this->calculate_power_factor_(this->read_angle_raw_(BL0910_ANGLE_7), this->power_factor_7_sensor_);
         break;
       case 8:
         this->read_data_(BL0910_I_8_RMS, BL0910_IREF, this->current_8_sensor_);
         this->read_data_(BL0910_WATT_8, BL0910_PREF, this->power_8_sensor_);
         this->read_data_(BL0910_CF_8_CNT, BL0910_EREF, this->energy_8_sensor_);
-        this->calculate_power_factor_(this->current_8_sensor_, this->voltage_sensor_, this->power_8_sensor_, this->power_factor_8_sensor_);
+        this->calculate_power_factor_(this->read_angle_raw_(BL0910_ANGLE_8), this->power_factor_8_sensor_);
         break;
       case 9:
         this->read_data_(BL0910_I_9_RMS, BL0910_IREF, this->current_9_sensor_);
         this->read_data_(BL0910_WATT_9, BL0910_PREF, this->power_9_sensor_);
         this->read_data_(BL0910_CF_9_CNT, BL0910_EREF, this->energy_9_sensor_);
-        this->calculate_power_factor_(this->current_9_sensor_, this->voltage_sensor_, this->power_9_sensor_, this->power_factor_9_sensor_);
+        this->calculate_power_factor_(this->read_angle_raw_(BL0910_ANGLE_9), this->power_factor_9_sensor_);
         break;
       case 10:
         this->read_data_(BL0910_I_10_RMS, BL0910_IREF, this->current_10_sensor_);
         this->read_data_(BL0910_WATT_10, BL0910_PREF, this->power_10_sensor_);
         this->read_data_(BL0910_CF_10_CNT, BL0910_EREF, this->energy_10_sensor_);
-        this->calculate_power_factor_(this->current_10_sensor_, this->voltage_sensor_, this->power_10_sensor_, this->power_factor_10_sensor_);
+        this->calculate_power_factor_(this->read_angle_raw_(BL0910_ANGLE_10), this->power_factor_10_sensor_);
         break;
       case (UINT8_MAX - 2):
         this->read_data_(BL0910_FREQUENCY, BL0910_FREF, this->frequency_sensor_); // Frequency
+        // 保存频率值供功率因数计算使用
+        if (this->frequency_sensor_ != nullptr && this->frequency_sensor_->has_state())
+        {
+          this->frequency_hz_ = this->frequency_sensor_->state;
+        }
         this->read_data_(BL0910_V_RMS, BL0910_UREF, this->voltage_sensor_);       // Voltage
         break;
       case (UINT8_MAX - 1):
@@ -240,6 +246,11 @@ namespace esphome
           return;
         }
       }
+      else
+      {
+        ESP_LOGW(TAG, "Read failed for address 0x%02X. Discarding message.", address);
+        return;
+      }
       // 根据不同的参考值处理数据
       if (reference == BL0910_PREF || reference == BL0910_WATT)
       {
@@ -261,14 +272,47 @@ namespace esphome
       sensor->publish_state(value);
     }
 
-    // 计算功率因数
-    void BL0910::calculate_power_factor_(sensor::Sensor *current_sensor, sensor::Sensor *voltage_sensor, sensor::Sensor *power_sensor, sensor::Sensor *power_factor_sensor)
+    // 读取16位相角寄存器（用于功率因数计算）
+    uint16_t BL0910::read_angle_raw_(uint8_t address)
     {
-      if (current_sensor != nullptr && voltage_sensor != nullptr && power_sensor != nullptr && power_factor_sensor != nullptr)
+      this->flush();
+      this->write_byte(BL0910_READ_COMMAND);
+      this->write_byte(address);
+
+      uint8_t data[4];
+      if (this->read_array(data, 4))
       {
-        float power_factor = (current_sensor->state * voltage_sensor->state) / power_sensor->state;
-        power_factor_sensor->publish_state(power_factor);
+        uint8_t l = data[0], m = data[1], h = data[2], chksum = data[3];
+        uint8_t expected = (address + l + m + h) ^ 0xFF;
+        if (chksum == expected)
+        {
+          // 相角为16位无符号值：高字节为 data_m，低字节为 data_l
+          return (uint16_t)((m << 8) | l);
+        }
+        else
+        {
+          ESP_LOGW(TAG, "Checksum failed for angle register 0x%02X.", address);
+        }
       }
+      else
+      {
+        ESP_LOGW(TAG, "Read failed for angle register 0x%02X.", address);
+      }
+      return 0;
+    }
+
+    // 计算功率因数（通过相角寄存器值，与参考实现 bl0910_ser_reader.py 一致）
+    void BL0910::calculate_power_factor_(uint16_t angle_reg, sensor::Sensor *power_factor_sensor)
+    {
+      if (power_factor_sensor == nullptr)
+      {
+        return;
+      }
+      // 相角(°) = 360 * angle_reg * freq / 500000
+      float angle_deg = 360.0f * angle_reg * this->frequency_hz_ / 500000.0f;
+      // PF = cos(angle_deg)
+      float power_factor = cosf(angle_deg * M_PI / 180.0f);
+      power_factor_sensor->publish_state(power_factor);
     }
 
     // 偏移校准函数

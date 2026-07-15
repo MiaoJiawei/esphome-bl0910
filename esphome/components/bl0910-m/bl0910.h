@@ -100,7 +100,8 @@ namespace esphome
       friend class ResetEnergyAction;
       void reset_energy_();
       void read_data_(uint8_t address, float reference, sensor::Sensor *sensor);
-      void calculate_power_factor_(sensor::Sensor *current_sensor, sensor::Sensor *voltage_sensor, sensor::Sensor *power_sensor, sensor::Sensor *power_factor_sensor);
+      uint16_t read_angle_raw_(uint8_t address);
+      void calculate_power_factor_(uint16_t angle_reg, sensor::Sensor *power_factor_sensor);
       void bias_correction_(uint8_t address, float measurements, float correction);
       void gain_correction_(uint8_t address, float measurements, float correction);
       uint8_t current_channel_{0};
@@ -109,6 +110,7 @@ namespace esphome
 
     private:
       std::vector<ActionCallbackFuncPtr> action_queue_{};
+      float frequency_hz_{50.0f};
     };
 
     template <typename... Ts>

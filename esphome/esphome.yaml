@@ -6,8 +6,8 @@ esp8266:
   board: esp01_1m
 
 wifi:
-  ssid: "PipiHome Miao"
-  password: "Pgh^voi*icVS3c!J"
+  ssid: "Xiaomi-732"
+  password: "qazse123"
 
 # Enable logging
 logger:
@@ -24,12 +24,12 @@ ota:
   password: "Mjw18349276"
 
 external_components:
-  - source: bl0910-m
-    
+  - source: ./components
+
 uart:
   tx_pin: GPIO1
   rx_pin: GPIO3
-  baud_rate: 19200
+  baud_rate: 4800
 
 sensor:
   - platform: bl0910-m
@@ -47,6 +47,8 @@ sensor:
         name: 'Power_1'
       energy:
         name: 'Energy_1'
+      power_factor:
+        name: 'Power_Factor_1'
     channel_2:
       current:
         name: 'Current_2'
@@ -54,6 +56,8 @@ sensor:
         name: 'Power_2'
       energy:
         name: 'Energy_2'
+      power_factor:
+        name: 'Power_Factor_2'
     channel_3:
       current:
         name: 'Current_3'
@@ -61,6 +65,8 @@ sensor:
         name: 'Power_3'
       energy:
         name: 'Energy_3'
+      power_factor:
+        name: 'Power_Factor_3'
     channel_4:
       current:
         name: 'Current_4'
@@ -68,6 +74,8 @@ sensor:
         name: 'Power_4'
       energy:
         name: 'Energy_4'
+      power_factor:
+        name: 'Power_Factor_4'
     channel_5:
       current:
         name: 'Current_5'
@@ -75,6 +83,8 @@ sensor:
         name: 'Power_5'
       energy:
         name: 'Energy_5'
+      power_factor:
+        name: 'Power_Factor_5'
     channel_6:
       current:
         name: 'Current_6'
@@ -82,6 +92,8 @@ sensor:
         name: 'Power_6'
       energy:
         name: 'Energy_6'
+      power_factor:
+        name: 'Power_Factor_6'
     channel_7:
       current:
         name: 'Current_7'
@@ -89,6 +101,8 @@ sensor:
         name: 'Power_7'
       energy:
         name: 'Energy_7'
+      power_factor:
+        name: 'Power_Factor_7'
     channel_8:
       current:
         name: 'Current_8'
@@ -96,6 +110,8 @@ sensor:
         name: 'Power_8'
       energy:
         name: 'Energy_8'
+      power_factor:
+        name: 'Power_Factor_8'
     channel_9:
       current:
         name: 'Current_9'
@@ -103,6 +119,8 @@ sensor:
         name: 'Power_9'
       energy:
         name: 'Energy_9'
+      power_factor:
+        name: 'Power_Factor_9'
     channel_10:
       current:
         name: 'Current_10'
@@ -110,6 +128,8 @@ sensor:
         name: 'Power_10'
       energy:
         name: 'Energy_10'
+      power_factor:
+        name: 'Power_Factor_10'
     total_energy:
       name: 'Total_Energy'
     total_power:

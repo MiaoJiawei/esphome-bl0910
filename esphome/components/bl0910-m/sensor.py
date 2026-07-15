@@ -79,9 +79,9 @@ CONFIG_SCHEMA = (
     .extend(cv.polling_component_schema("10s"))
 )
 
-# 设备验证，指定UART的通信参数
+# 设备验证，指定UART的通信参数（波特率由用户在 uart 配置中自由设置）
 FINAL_VALIDATE_SCHEMA = uart.final_validate_device_schema(
-    "bl0910", baud_rate=19200, require_tx=True, require_rx=True
+    "bl0910", require_tx=True, require_rx=True
 )
 
 # 注册“重置电量”动作
