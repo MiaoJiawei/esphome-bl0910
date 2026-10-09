@@ -6,8 +6,8 @@ esp8266:
   board: esp01_1m
 
 wifi:
-  ssid: "Xiaomi-732"
-  password: "qazse123"
+  ssid: "SSID"
+  password: "WIFI_PASSWD"
 
 # Enable logging
 logger:
@@ -16,12 +16,12 @@ logger:
 # Enable Home Assistant API
 api:
   encryption:
-    key: "Y9copYobNapWXbNfcGhifGPHbnvHvVwBGd4Y5Dt0UXs="
+    key: "HASS_API"
   reboot_timeout: 0s
 
 ota:
   platform: esphome
-  password: "Mjw18349276"
+  password: "PASSWD"
 
 external_components:
   - source: ./components
